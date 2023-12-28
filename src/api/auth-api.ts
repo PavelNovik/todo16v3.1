@@ -6,6 +6,9 @@ export const authAPI = {
     },
     me() {
         return instance.get<ResponseType<User>>('auth/me')
+    },
+    logout() {
+        return instance.delete<ResponseType>('auth/login')
     }
 }
 export type LoginParams = {
