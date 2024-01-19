@@ -29,9 +29,9 @@ export const loginTC = (data: any) => async (dispatch: Dispatch<ActionsType>) =>
         if(res.data.resultCode === ResultCodes.Succeeded) {
             dispatch(setIsLoggedInAC(true))
             dispatch(setAppStatusAC('succeeded'))
+            return res.data
         } else {
             handleServerAppError(res.data, dispatch)
-            return res.data
         }
     } catch (e) {
         handleServerNetworkError(e as Error, dispatch)
