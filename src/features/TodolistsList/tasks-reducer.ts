@@ -32,6 +32,7 @@ export const tasksReducer = (state: TasksStateType = initialState, action: Actio
             })
             return copyState
         }
+        case "CLEAR-TODOLIST-DATA": return {}
         case 'SET-TASKS':
             return {...state, [action.todolistId]: action.tasks}
         default:
@@ -53,6 +54,13 @@ export const setTasksAC = (tasks: Array<TaskType>, todolistId: string) => ({
     tasks,
     todolistId
 } as const)
+
+export type ClearTodolistsDataType = ReturnType<typeof clearTodolistsData>
+export const clearTodolistsData = ()=> {
+    return {
+        type: 'CLEAR-TODOLIST-DATA'
+    } as const
+}
 
 // thunks
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<ActionsType | SetAppStatusActionType>) => {
@@ -141,5 +149,5 @@ type ActionsType =
     | AddTodolistActionType
     | RemoveTodolistActionType
     | SetTodolistsActionType
-    | ReturnType<typeof setTasksAC>
+    | ReturnType<typeof setTasksAC> | ClearTodolistsDataType
 type ThunkDispatch = Dispatch<ActionsType | SetAppStatusActionType | SetAppErrorActionType>
